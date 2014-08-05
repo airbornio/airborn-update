@@ -1,0 +1,9 @@
+{
+	"name": "airborn-update",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "3.4.8",
+		"newrelic": "1.8.x",
+		"jszip": "2.4.x"
+	}
+}
