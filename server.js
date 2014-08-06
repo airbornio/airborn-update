@@ -30,11 +30,13 @@ zip.file('airborn/version-id', currentId);
 var current = zip.generate({type: 'nodebuffer'});
 
 app.get('/current', function(req, res) {
+	res.set('Access-Control-Allow-Origin', '*');
 	res.set('Content-Type', 'application/zip');
 	res.send(200, current);
 });
 
 app.get('/current-id', function(req, res) {
+	res.set('Access-Control-Allow-Origin', '*');
 	res.send(200, currentId);
 });
 
