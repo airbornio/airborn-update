@@ -1,6 +1,7 @@
 #!/bin/bash
 
 airborn_src=`[ $1 ] && readlink -m $1 || echo https://github.com/twiss/airborn.git`
+marketplace_src=`[ $2 ] && readlink -m $2 || echo https://github.com/twiss/airborn-marketplace-app.git`
 
 (
 	echo Updating Airborn from $airborn_src
@@ -12,8 +13,19 @@ airborn_src=`[ $1 ] && readlink -m $1 || echo https://github.com/twiss/airborn.g
 	git gc -q &&
 	mv .git git
 ) &&
-git add -A airborn &&
+(
+	echo Updating Marketplace from $marketplace_src
+	[ -d marketplace ] || git clone -q --depth 100 $marketplace_src marketplace &&
+	cd marketplace &&
+	([ -d .git ] || mv git .git) &&
+	git pull -q $marketplace_src --depth=100 &&
+	git pull -q $marketplace_src --depth=1 &&
+	git gc -q &&
+	mv .git git
+) &&
+git add -A airborn marketplace &&
 git commit -qm "Update airborn" &&
 (cd airborn && mv git .git) &&
+(cd marketplace && mv git .git) &&
 git push -qf heroku master
 git reset -q HEAD^
