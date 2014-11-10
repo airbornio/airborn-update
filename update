@@ -1,3 +1,19 @@
 #!/bin/bash
 
-(cd airborn && git pull) && git commit --amend -am "Update airborn" && git push heroku -f
+airborn_src=`[ $1 ] && readlink -m $1 || echo https://github.com/twiss/airborn.git`
+
+(
+	echo Updating Airborn from $airborn_src
+	[ -d airborn ] || git clone -q --depth 100 $airborn_src airborn &&
+	cd airborn &&
+	([ -d .git ] || mv git .git) &&
+	git pull -q $airborn_src --depth=100 &&
+	git pull -q $airborn_src --depth=1 &&
+	git gc -q &&
+	mv .git git
+) &&
+git add -A airborn &&
+git commit -qm "Update airborn" &&
+(cd airborn && mv git .git) &&
+git push -qf heroku master
+git reset -q HEAD^
