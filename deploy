@@ -1,0 +1,10 @@
+#!/bin/bash
+
+(cd airborn && mv .git git) &&
+(cd marketplace && mv .git git) &&
+git add -A airborn marketplace &&
+git commit -qm "Update airborn" &&
+(cd airborn && mv git .git) &&
+(cd marketplace && mv git .git) &&
+git push -qf heroku master &&
+git reset -q HEAD^
