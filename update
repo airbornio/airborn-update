@@ -2,6 +2,7 @@
 
 airborn_src=`[ $1 ] && echo file://$(readlink -m $1) || echo https://github.com/twiss/airborn.git`
 marketplace_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.com/twiss/airborn-marketplace-app.git`
+firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com/codexa/firetext.git`
 
 (
 	echo Updating Airborn from $airborn_src
@@ -12,4 +13,9 @@ marketplace_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.
 	echo Updating Marketplace from $marketplace_src
 	rm -rf marketplace &&
 	git clone -q --depth 1 $marketplace_src marketplace
+) &&
+(
+	echo Updating Firetext from $firetext_src
+	rm -rf firetext &&
+	git clone -q --depth 1 $firetext_src firetext
 )

@@ -2,10 +2,12 @@
 
 (cd airborn && mv .git git) &&
 (cd marketplace && mv .git git) &&
-git add -A airborn marketplace &&
+(cd firetext && mv .git git) &&
+git add -A airborn marketplace firetext &&
 git commit -qm "Update airborn" &&
 (cd airborn && mv git .git) &&
 (cd marketplace && mv git .git) &&
+(cd firetext && mv git .git) &&
 (
 	git push -qf heroku master
 	git reset -q HEAD^
