@@ -4,6 +4,7 @@
 (cd marketplace && mv .git git) &&
 (cd firetext && mv .git git) &&
 git add -A airborn marketplace firetext &&
+git reset HEAD airborn/git marketplace/git firetext/git &&
 git commit -qm "Update airborn" &&
 (cd airborn && mv git .git) &&
 (cd marketplace && mv git .git) &&
