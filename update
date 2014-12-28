@@ -7,15 +7,15 @@ firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com
 (
 	echo Updating Airborn from $airborn_src
 	rm -rf airborn &&
-	git clone -q --depth 1 $airborn_src airborn
+	git clone -q --depth 1 --recursive $airborn_src airborn
 ) &&
 (
 	echo Updating Marketplace from $marketplace_src
 	rm -rf marketplace &&
-	git clone -q --depth 1 $marketplace_src marketplace
+	git clone -q --depth 1 --recursive $marketplace_src marketplace
 ) &&
 (
 	echo Updating Firetext from $firetext_src
 	rm -rf firetext &&
-	git clone -q --depth 1 $firetext_src firetext
+	git clone -q --depth 1 --recursive $firetext_src firetext
 )
