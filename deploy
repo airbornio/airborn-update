@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-find airborn marketplace firetext | grep \.git[^/]*$ | sed -e 'p;s/.git/git/' | xargs -n2 mv &&
-git add -A airborn marketplace firetext &&
-find airborn marketplace firetext | grep git[^/]*$ | xargs git reset HEAD &&
+find airborn marketplace firetext history | grep \.git[^/]*$ | sed -e 'p;s/.git/git/' | xargs -n2 mv &&
+git add -A airborn marketplace firetext history &&
+find airborn marketplace firetext history | grep git[^/]*$ | xargs git reset HEAD &&
 git commit -qm "Update airborn" &&
-find airborn marketplace firetext | grep git[^/]*$ | sed -e 'p;s/git/.git/' | xargs -n2 mv &&
+find airborn marketplace firetext history | grep git[^/]*$ | sed -e 'p;s/git/.git/' | xargs -n2 mv &&
 (
 	git push -qf heroku master
 	git reset -q HEAD^

@@ -22,6 +22,7 @@ var walk = function(dir) {
 var airborn = walk('airborn');
 var marketplace = walk('marketplace');
 var firetext = walk('firetext');
+var history = walk('history');
 
 var v1 = (function() {
 	var zip = new JSZip();
@@ -55,6 +56,11 @@ var v2 = (function() {
 	firetext.forEach(function(path) {
 		var contents = fs.readFileSync(path);
 		zip.file(path.replace('firetext/', 'Apps/firetext/'), contents);
+		shasum.update(contents);
+	});
+	history.forEach(function(path) {
+		var contents = fs.readFileSync(path);
+		zip.file(path.replace('history/', 'Apps/history/'), contents);
 		shasum.update(contents);
 	});
 	var currentId = shasum.digest('hex');
