@@ -3,6 +3,7 @@ require('newrelic');
 var fs = require('fs');
 var crypto = require('crypto');
 var JSZip = require('jszip');
+var jsyaml = require('js-yaml');
 
 var express = require('express');
 var app = express();
@@ -92,6 +93,35 @@ app.get('/v2/current', function(req, res) {
 app.get('/v2/current-id', function(req, res) {
 	res.set('Access-Control-Allow-Origin', '*');
 	res.send(200, v2.currentId);
+});
+
+app.get(/^\/v2\/live(\/.*)$/, function(req, res) {
+	var pathMap = {
+		'/Core/': 'airborn/',
+		'/Apps/marketplace/': 'marketplace/',
+		'/Apps/firetext/': 'firetext/',
+		'/Apps/history/': 'history/'
+	};
+	var path = req.params[0];
+	if(path === '/Apps/') {
+		var results = {};
+		results['marketplace/'] =
+		results['firetext/'] =
+		results['history/'] =
+			{created: new Date()};
+		res.send(jsyaml.safeDump(results, {flowLevel: 1}));
+		return;
+	}
+	if(!Object.keys(pathMap).some(function(key) {
+		if(path.substr(0, key.length) === key) {
+			path = path.replace(key, pathMap[key]).replace(/\.\./g, '');
+			console.log(path, path.substr(-1));
+			res.sendFile(path, {root: __dirname});
+			return true;
+		}
+	})) {
+		res.send(404);
+	}
 });
 
 var server = app.listen(process.env.PORT || 8080, function() {
