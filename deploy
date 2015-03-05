@@ -1,5 +1,6 @@
 #!/bin/bash
 
+remote=`[ $1 ] && echo -n $1 || echo -n heroku`
 
 find airborn marketplace firetext history | grep \.git[^/]*$ | sed -e 'p;s/.git/git/' | xargs -n2 mv &&
 git add -A airborn marketplace firetext history &&
@@ -7,6 +8,6 @@ find airborn marketplace firetext history | grep git[^/]*$ | xargs git reset HEA
 git commit -qm "Update airborn" &&
 find airborn marketplace firetext history | grep git[^/]*$ | sed -e 'p;s/git/.git/' | xargs -n2 mv &&
 (
-	git push -qf heroku master
+	git push -qf $remote master
 	git reset -q HEAD^
 )
