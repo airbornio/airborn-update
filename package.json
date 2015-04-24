@@ -2,7 +2,7 @@
 	"name": "airborn-update",
 	"version": "0.0.1",
 	"dependencies": {
-		"express": "4.10.0",
+		"express": "4.12.3",
 		"newrelic": "1.8.x",
 		"jszip": "2.4.x",
 		"js-yaml": "3.0.2"
