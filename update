@@ -18,7 +18,15 @@ history_src=`[ $4 ] && echo file://$(readlink -m $4) || echo https://github.com/
 (
 	echo Updating Firetext from $firetext_src
 	rm -rf firetext &&
-	git clone -q --depth 1 --recursive $firetext_src firetext
+	git clone -q --depth 1 --recursive $firetext_src firetext &&
+	[ "$5" != "--build" ] ||
+	(
+		echo "Building Firetext..." &&
+		firetext/builder/build --airborn &&
+		rm -rf $(find firetext -mindepth 1 -maxdepth 1 | grep -v build$) &&
+		cp -r firetext/build/* firetext &&
+		rm -rf firetext/build
+	)
 ) &&
 (
 	echo Updating History from $history_src
