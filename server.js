@@ -23,6 +23,7 @@ var walk = function(dir) {
 var airborn = walk('airborn');
 var marketplace = walk('marketplace');
 var firetext = walk('firetext');
+var strut = walk('strut');
 
 var v1 = (function() {
 	var zip = new JSZip();
@@ -56,6 +57,11 @@ var v2 = (function() {
 	firetext.forEach(function(path) {
 		var contents = fs.readFileSync(path);
 		zip.file(path.replace('firetext/', 'Apps/firetext/'), contents);
+		shasum.update(contents);
+	});
+	strut.forEach(function(path) {
+		var contents = fs.readFileSync(path);
+		zip.file(path.replace('strut/', 'Apps/strut/'), contents);
 		shasum.update(contents);
 	});
 	var currentId = shasum.digest('hex');
@@ -94,12 +100,14 @@ app.get(/^\/v2\/live(\/.*)$/, function(req, res) {
 		'/Core/': 'airborn/',
 		'/Apps/marketplace/': 'marketplace/',
 		'/Apps/firetext/': 'firetext/',
+		'/Apps/strut/': 'strut/'
 	};
 	var path = req.params[0];
 	if(path === '/Apps/') {
 		var results = {};
 		results['marketplace/'] =
 		results['firetext/'] =
+		results['strut/'] =
 			{created: new Date()};
 		res.send(jsyaml.safeDump(results, {flowLevel: 1}));
 		return;

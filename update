@@ -3,6 +3,7 @@
 airborn_src=`[ $1 ] && echo file://$(readlink -m $1) || echo https://github.com/twiss/airborn.git`
 marketplace_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.com/twiss/airborn-marketplace-app.git`
 firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com/codexa/firetext.git`
+strut_src=`[ $4 ] && echo file://$(readlink -m $4) || echo https://github.com/twiss/Strut.git`
 
 (
 	echo Updating Airborn from $airborn_src
@@ -18,7 +19,7 @@ firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com
 	echo Updating Firetext from $firetext_src
 	rm -rf firetext &&
 	git clone -q --depth 1 --recursive $firetext_src firetext &&
-	[ "$4" != "--build" ] ||
+	[ "$5" != "--build" ] ||
 	(
 		echo "Building Firetext..." &&
 		firetext/builder/build --airborn &&
@@ -26,4 +27,9 @@ firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com
 		cp -r firetext/build/* firetext &&
 		rm -rf firetext/build
 	)
+) &&
+(
+	echo Updating Strut from $strut_src
+	rm -rf strut &&
+	git clone -q --depth 1 --recursive $strut_src strut
 )
