@@ -5,11 +5,17 @@ marketplace_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.
 firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com/codexa/firetext.git`
 strut_src=`[ $4 ] && echo file://$(readlink -m $4) || echo https://github.com/twiss/Strut.git`
 
-(
-	echo Updating Airborn from $airborn_src
-	rm -rf airborn &&
-	git clone -q --depth 1 --recursive $airborn_src airborn
-) &&
+maxprocs=$(( $(nproc --all) - 1 ))
+
+CjC=$3/builder/node_modules/google-closure-compiler/compiler.jar
+function CjC {
+	nice -20  java -jar $CjC --language_in ECMASCRIPT6 --language_out ECMASCRIPT5 $1 --warning_level QUIET --js_output_file $1~ &&
+	mv $1~ $1 &&
+	echo Compiled $1
+}
+export CjC
+export -f CjC
+
 (
 	echo Updating Marketplace from $marketplace_src
 	rm -rf marketplace &&
@@ -26,6 +32,16 @@ strut_src=`[ $4 ] && echo file://$(readlink -m $4) || echo https://github.com/tw
 		rm -rf $(find firetext -mindepth 1 -maxdepth 1 | grep -v build$) &&
 		cp -r firetext/build/* firetext &&
 		rm -rf firetext/build
+	)
+) &&
+(
+	echo Updating Airborn from $airborn_src
+	rm -rf airborn &&
+	git clone -q --depth 1 --recursive $airborn_src airborn &&
+	[ "$5" != "--build" ] ||
+	(
+		echo "Building Airborn OS..." &&
+		find airborn -name "*.js" ! -name "*.min.js" | xargs -n1 -P $maxprocs -I{} bash -c "CjC {}"
 	)
 ) &&
 (
