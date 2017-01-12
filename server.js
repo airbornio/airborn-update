@@ -35,7 +35,7 @@ var v1 = (function() {
 	});
 	var currentId = shasum.digest('hex');
 	zip.file('airborn/version-id', currentId);
-	var current = zip.generate({type: 'nodebuffer'});
+	var current = zip.generate({type: 'nodebuffer', compression: 'DEFLATE'});
 	return {
 		currentId: currentId,
 		current: current
@@ -66,7 +66,7 @@ var v2 = (function() {
 	});
 	var currentId = shasum.digest('hex');
 	zip.file('Core/version-id', currentId);
-	var current = zip.generate({type: 'nodebuffer'});
+	var current = zip.generate({type: 'nodebuffer', compression: 'DEFLATE'});
 	return {
 		currentId: currentId,
 		current: current
