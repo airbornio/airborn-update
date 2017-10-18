@@ -48,4 +48,7 @@ export -f CjC
 	echo Updating Strut from $strut_src
 	rm -rf strut &&
 	git clone -q --depth 1 --recursive $strut_src strut
-)
+) &&
+npm install &&
+node update.js &&
+rm -rf marketplace firetext airborn strut
