@@ -16,7 +16,6 @@ var walk = function(dir) {
 }
 
 var airborn = walk('airborn');
-var marketplace = walk('marketplace');
 var firetext = walk('firetext');
 var strut = walk('strut');
 
@@ -40,11 +39,6 @@ var v2 = (function() {
 	airborn.forEach(function(path) {
 		var contents = fs.readFileSync(path);
 		zip.file(path.replace('airborn/', 'Core/'), contents);
-		shasum.update(contents);
-	});
-	marketplace.forEach(function(path) {
-		var contents = fs.readFileSync(path);
-		zip.file(path.replace('marketplace/', 'Apps/marketplace/'), contents);
 		shasum.update(contents);
 	});
 	firetext.forEach(function(path) {

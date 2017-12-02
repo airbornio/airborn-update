@@ -1,13 +1,12 @@
 #!/bin/bash
 
 airborn_src=`[ $1 ] && echo file://$(readlink -m $1) || echo https://github.com/twiss/airborn.git`
-marketplace_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.com/twiss/airborn-marketplace-app.git`
-firetext_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com/codexa/firetext.git`
-strut_src=`[ $4 ] && echo file://$(readlink -m $4) || echo https://github.com/twiss/Strut.git`
+firetext_src=`[ $2 ] && echo file://$(readlink -m $2) || echo https://github.com/codexa/firetext.git`
+strut_src=`[ $3 ] && echo file://$(readlink -m $3) || echo https://github.com/twiss/Strut.git`
 
 maxprocs=$(( $(nproc --all) - 1 ))
 
-CjC=$3/builder/node_modules/google-closure-compiler/compiler.jar
+CjC=$2/builder/node_modules/google-closure-compiler/compiler.jar
 function CjC {
 	nice -20  java -jar $CjC --language_in ECMASCRIPT6 --language_out ECMASCRIPT5 $1 --warning_level QUIET --js_output_file $1~ &&
 	mv $1~ $1 &&
@@ -17,15 +16,10 @@ export CjC
 export -f CjC
 
 (
-	echo Updating Marketplace from $marketplace_src
-	rm -rf marketplace &&
-	git clone -q --depth 1 --recursive $marketplace_src marketplace
-) &&
-(
 	echo Updating Firetext from $firetext_src
 	rm -rf firetext &&
 	git clone -q --depth 1 --recursive $firetext_src firetext &&
-	[ "$5" != "--build" ] ||
+	[ "$4" != "--build" ] ||
 	(
 		echo "Building Firetext..." &&
 		firetext/builder/build --airborn &&
@@ -38,7 +32,7 @@ export -f CjC
 	echo Updating Airborn from $airborn_src
 	rm -rf airborn &&
 	git clone -q --depth 1 --recursive $airborn_src airborn &&
-	[ "$5" != "--build" ] ||
+	[ "$4" != "--build" ] ||
 	(
 		echo "Building Airborn OS..." &&
 		find airborn -name "*.js" ! -name "*.min.js" | xargs -n1 -P $maxprocs -I{} bash -c "CjC {}"
@@ -51,4 +45,4 @@ export -f CjC
 ) &&
 npm install &&
 node update.js &&
-rm -rf marketplace firetext airborn strut
+rm -rf firetext airborn strut
