@@ -2,7 +2,7 @@
 
 remote=`[ $1 ] && echo -n $1 || echo -n heroku`
 
-git add -A current-id current v2-current-id v2-current &&
+git add -A current-id current v2-current-id v2-current firetext airborn strut &&
 git commit -qm "Update airborn" &&
 (
 	git push -f origin master:deploy &&

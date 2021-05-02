@@ -19,6 +19,7 @@ export -f CjC
 	echo Updating Firetext from $firetext_src
 	rm -rf firetext &&
 	git clone -q --depth 1 --recursive $firetext_src firetext &&
+	rm -rf firetext/.git &&
 	[ "$4" != "--build" ] ||
 	(
 		echo "Building Firetext..." &&
@@ -32,6 +33,7 @@ export -f CjC
 	echo Updating Airborn from $airborn_src
 	rm -rf airborn &&
 	git clone -q --depth 1 --recursive $airborn_src airborn &&
+	rm -rf airborn/.git &&
 	[ "$4" != "--build" ] ||
 	(
 		echo "Building Airborn OS..." &&
@@ -41,8 +43,8 @@ export -f CjC
 (
 	echo Updating Strut from $strut_src
 	rm -rf strut &&
-	git clone -q --depth 1 --recursive $strut_src strut
+	git clone -q --depth 1 --recursive $strut_src strut &&
+	rm -rf strut/.git
 ) &&
 npm install &&
-node update.js &&
-rm -rf firetext airborn strut
+node update.js
