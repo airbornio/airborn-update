@@ -1,0 +1,58 @@
+# flyctl launch added from firetext/.gitignore
+firetext/**/node_modules
+firetext/dist
+firetext/**/npm-debug.log
+
+firetext/build
+firetext/builder/node_modules
+firetext/**/logs
+firetext/**/*.log
+firetext/**/npm-debug.log*
+firetext/**/.DS_Store
+firetext/**/._.DS_Store
+firetext/**/.db
+firetext/**/thumbs.db
+firetext/**/_MACOSX
+firetext/**/__MACOSX
+firetext/**/.idea
+firetext/**/*.sublime-workspace
+
+# flyctl launch added from firetext/electronApp/.gitignore
+firetext/electronApp/**/node_modules
+firetext/electronApp/dist
+firetext/electronApp/**/.idea
+firetext/electronApp/**/npm-debug.log
+
+# flyctl launch added from strut/.gitignore
+strut/**/node_modules
+strut/**/*.gz
+strut/**/temp
+strut/**/deprecated
+strut/**/.DS_STORE
+strut/**/.tmp
+strut/**/compiled-templates.js
+strut/**/repl-port
+strut/**/bin
+strut/**/ccw.repl.cmdhistory.prefs
+strut/**/psd-export
+strut/**/.project
+strut/**/.buildpath
+strut/**/.tern-port
+
+
+# flyctl launch added from strut/doc/design_overview/.gitignore
+strut/doc/design_overview/**/*~
+
+# flyctl launch added from strut/ui-tests/.gitignore
+strut/ui-tests/target
+strut/ui-tests/lib
+strut/ui-tests/classes
+strut/ui-tests/checkouts
+strut/ui-tests/**/pom.xml
+strut/ui-tests/**/pom.xml.asc
+strut/ui-tests/**/*.jar
+strut/ui-tests/**/*.class
+strut/ui-tests/**/.lein-deps-sum
+strut/ui-tests/**/.lein-failures
+strut/ui-tests/**/.lein-plugins
+strut/ui-tests/**/.lein-repl-history
