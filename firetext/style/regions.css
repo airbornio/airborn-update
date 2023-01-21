@@ -1,0 +1,63 @@
+/*
+* Regions
+* Copyright (C) Codexa Organization.
+*/
+
+section[role="region"], section[role="dialog"] {
+  width: 100%;
+  height: 100%;  
+  z-index: 101;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;  
+  background-color: #fff;  
+    -moz-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s, visibility .4s;
+    -webkit-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s, visibility .4s;
+    -o-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s, visibility .4s;
+  transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s, visibility .4s;
+}
+
+section[role="region"] {
+  visibility: hidden;
+}
+
+section[role="region"].current,
+[role="region"].parent,
+[role="dialog"].parent {
+  visibility: visible;
+  z-index: 100; 
+}
+
+section[role="dialog"] {
+  visibility: hidden;
+    -moz-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+section[role="dialog"].current {
+  z-index: 101;
+  visibility: visible;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+  transform: none;
+    -moz-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s;
+    -webkit-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s;
+    -o-transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s;
+  transition: -moz-transform .4s, -webkit-transform .4s, -o-transform .4s, -ms-transform .4s, transform .4s;
+}
+
+/* Sidebars */
+[data-type="sidebar"] {
+  visibility: collapse;
+}
+
+[data-type="sidebar"].active {
+  visibility: visible;
+}

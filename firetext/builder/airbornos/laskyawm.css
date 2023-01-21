@@ -1,0 +1,215 @@
+* {
+	box-sizing: border-box;
+}
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	background-color: #607B8B;
+	cursor: default;
+	font-family: sans-serif;
+	height: 0;
+}
+body:before,
+#sidebar:before,
+.window:before {
+	background-attachment: fixed;
+}
+body:before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1000;
+}
+.window {
+	width: 800px;
+	height: 600px;
+	border-radius: 7px;
+	position: absolute !important;
+	top: 25px;
+	left: 100px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, .3);
+	background-color: rgba(255, 255, 255, .2);
+}
+.window:before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: .5;
+	z-index: -1;
+	border-radius: 7px;
+}
+.window .titlebar {
+	height: 25px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	padding: 0 5px;
+}
+.window.focused {
+	background-color: rgba(255, 255, 255, .6);
+}
+.window .titlebar button {
+	border: 1px solid transparent;
+	border-radius: 7px;
+	width: 18px;
+	height: 18px;
+	margin-top: 3px;
+	float: left;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.window .titlebar .close {
+	background-image: url(close.png);
+}
+.window .titlebar .minimize {
+	background-image: url(minimize.png);
+}
+.window.minimized .titlebar .minimize {
+	background-image: url(unminimize.png);
+}
+.window.minimized .titlebar .maximize {
+	display: none;
+}
+.window .titlebar .maximize {
+	background-image: url(maximize.png);
+}
+.window.maximized .titlebar .maximize {
+	background-image: url(unmaximize.png);
+}
+.window .titlebar button:hover {
+	border-color: rgba(204, 204, 204, 0.5);
+	background-color: rgba(245, 245, 245, .5) !important;
+}
+.window .titlebar button:focus {
+	outline: 1px solid gray;
+	-moz-outline-radius: 4px;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.window .titlebar button::-moz-focus-inner {
+	border: 0;
+}
+.window .titlebar .tabbar {
+	display: inline-block;
+	white-space: nowrap;
+	max-width: calc(100% - 130px);
+	overflow: hidden;
+	z-index: 1;
+	position: relative;
+	margin-left: 20px;
+}
+.window .titlebar .tabbar:hover {
+	overflow-x: auto;
+}
+.window .titlebar .tabbar .tabtitlebar, .window .titlebar .addtab {
+	background-color: #DDD;
+	display: inline-block;
+	height: 25px;
+	margin-left: 6px;
+	line-height: 27px;
+	padding: 0 10px;
+	cursor: default;
+	overflow: hidden;
+	position: relative;
+}
+.window .titlebar .tabbar .tabtitlebar:first-child {
+	margin-left: 0;
+}
+.window .titlebar .tabbar .tabtitlebar.focused {
+	background-color: white;
+}
+.window .titlebar .icon {
+	float: right;
+	margin-top: 6px;
+	height: 16px;
+}
+.window .tabs {
+	height: calc(100% - 25px);
+}
+.window .tab {
+	height: 100%;
+	left: -100000px;
+	position: absolute;
+}
+.window .tab.focused {
+	left: 0;
+	position: relative;
+}
+.window iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	background-color: white;
+	position: absolute;
+	left: 0;
+}
+.hud {
+	position: absolute;
+	border: 5px solid #5CC9FF;
+	z-index: 999;
+	border-radius: 7px;
+}
+.window.maximized, .hud {
+	top: 25px !important;
+	height: calc(100% - 25px) !important;
+}
+.window.maximized.maximized-max, .hud-max {
+	left: 100px !important;
+	width: calc(100% - 100px) !important;
+}
+.window.maximized.maximized-left, .hud-left {
+	left: 100px !important;
+	width: calc(50% - 50px) !important;
+}
+.window.maximized.maximized-right, .hud-right {
+	left: calc(50% + 50px) !important;
+	width: calc(50% - 50px) !important;
+}
+.window.maximized:not(.minimized) {
+	box-shadow: none;
+}
+.window.minimized.minimized { /* same specificity as .maximized above */
+	top: 0 !important;
+	width: 250px !important;
+	max-height: 25px;
+	overflow: hidden;
+	background-color: white;
+}
+.window.minimized .titlebar .tabbar {
+	max-width: calc(100% - 112px);
+}
+.window.minimized iframe {
+	display: none;
+}
+.window.minimized.hover {
+	z-index: 1000 !important;
+	max-height: 120px;
+}
+.window.minimized.hover iframe {
+	display: block;
+	transform: scale(0.8);
+	transform-origin: 0 0;
+	-webkit-transform: scale(0.8);
+	-webkit-transform-origin: 0 0;
+	width: 125%;
+	height: 125%;
+	margin-bottom: -40px;
+}
+.window.minimized .ui-resizable-handle {
+	display: none !important;
+}
+.ui-resizable-handle {
+	z-index: 0 !important;
+}
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	pointer-events: none;
+}

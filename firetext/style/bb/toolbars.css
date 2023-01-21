@@ -1,0 +1,72 @@
+/* ----------------------------------
+* Toolbars
+* ---------------------------------- */
+
+[role="toolbar"] {
+  height: 4rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.95);
+}
+
+[role="toolbar"] ul {
+  float: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+[role="toolbar"] ul:last-child {
+  float: right;
+  text-align: right;
+}
+
+[role="toolbar"] li {
+  float: left;
+  width: 5.3rem;
+}
+
+[role="toolbar"] button {
+  width: 5rem;
+  height: 4rem;
+  border: none;
+  font-size: 0;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-indent: -100%;
+  margin: 0;
+}
+
+[role="toolbar"] button:active, 
+[role="toolbar"] button.active {
+  background-color: #bfbfbf;
+}
+
+[role="toolbar"] button[class^="icon-"], 
+[role="toolbar"] [class*=" icon-"] {
+  font-size: 3rem;
+  color: #1f1f1f;
+  text-shadow: none;
+  padding: 0 1rem .2rem;
+    -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+
+/* RTL */
+[dir="rtl"] [role="toolbar"] ul {
+    float: right;   
+}
+
+[dir="rtl"] [role="toolbar"] ul:last-child {
+    float: left;
+    text-align: left;
+}
+
+[dir="rtl"] [role="toolbar"] li {
+    float: right;   
+}

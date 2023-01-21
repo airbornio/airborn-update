@@ -1,0 +1,37 @@
+/* ----------------------------------
+ * Status
+ * ---------------------------------- */
+section[role="status"] {
+	background: #efefef;
+	color: #1f1f1f;
+	overflow: hidden;
+	position: absolute;
+	z-index: 200;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: left;
+	transition: all 0.3s;
+}
+
+section[role="status"] p {
+	font-size: 1.8rem;
+	font-weight: normal;
+	line-height: 2.2rem;
+	margin: 1rem 3rem;
+	padding: 0;
+	text-align: left;
+}
+
+section[role="status"] p strong {
+	font-weight: 500;
+}
+
+/*
+ * Right to Left View
+ */
+
+html[dir="rtl"] section[role="status"],
+html[dir="rtl"] section[role="status"] p {
+	text-align: right;
+}

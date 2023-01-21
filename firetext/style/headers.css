@@ -1,0 +1,33 @@
+/*
+* Header overrides
+* Copyright (C) Codexa Organization.
+*/
+
+section > header:first-child {
+  color: #444;
+  background: #ffffff;
+  border-bottom: solid 0.2rem #efefef;
+}
+
+section > header:first-child h1 {
+  color: inherit;
+  margin: 0 1rem;
+}
+
+section > header:first-child h1.firetext {
+  padding-top: 0;
+}
+
+section > header:first-child h1.firetext img {
+  width: 109px;
+}
+
+section > header:first-child [class^="icon-"], 
+section > header:first-child [class*=" icon-"] {
+  font-size: 3rem;
+  padding-top: 1.1rem;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+}
