@@ -5,5 +5,10 @@
 		"express": "4.12.3",
 		"newrelic": "1.8.x",
 		"jszip": "2.4.x"
+	},
+	"scripts": {
+		"predeploy": "sed -i \"s/\\$GIT_COMMIT/$(git rev-parse origin)/\" fly.toml",
+		"deploy": "fly deploy",
+		"postdeploy": "sed -i \"s/$(git rev-parse origin)/\\$GIT_COMMIT/\" fly.toml"
 	}
 }

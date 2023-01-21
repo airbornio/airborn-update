@@ -5,7 +5,7 @@ var app = express();
 
 app.use(function(req, res, next) {
 	if(req.method === 'GET') {
-		res.set('X-GitHub-Commit', process.env.HEROKU_SLUG_COMMIT);
+		res.set('X-GitHub-Commit', process.env.GIT_COMMIT);
 	}
 	next();
 });
